@@ -1,0 +1,25 @@
+	pipeline {
+	    agent any
+
+	    stages {
+	        stage('Checkout') {
+	            steps {
+	                git branch: 'main', url: 'https://github.com/chithra2024/sonarqubeintegration.git'
+	            }
+	        }
+	        stage('Build') {
+	            steps {
+	                sh 'mvn clean install'
+	            }
+	        }
+	        stage('SonarQube Analysis') {
+	            steps {
+	                withSonarQubeEnv('sonarqubeconfig') {
+	                    sh 'mvn sonar:sonar \
+	                        -Dsonar.host.url=http://localhost:9000 \
+	                        -Dsonar.token=squ_a7e65ae142c17df1d48ee0ca2424354bbe32b37c'
+	                }
+	            }
+	        }
+	    }
+	}
