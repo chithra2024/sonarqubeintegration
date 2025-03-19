@@ -14,7 +14,7 @@
 	        }
 	        stage('SonarQube Analysis') {
 	            steps {
-	                withSonarQubeEnv('sonarqubeconfig') {
+	                withSonarQubeEnv('server-sonar') {
 	                    sh 'mvn sonar:sonar \
 	                        -Dsonar.host.url=http://localhost:9000 \
 	                        -Dsonar.token=squ_a7e65ae142c17df1d48ee0ca2424354bbe32b37c'
